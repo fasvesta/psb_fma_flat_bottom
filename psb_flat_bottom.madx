@@ -30,9 +30,7 @@ MATCH, Sequence=psb1;
 	JACOBIAN,CALLS=1000,TOLERANCE=1.0E-18,STRATEGY=3;
 ENDMATCH; 
 
-
-!kBR1QNO816L1=  2*3.094e-4;
-!kBR1XSK6L4= -100*0.005845;
+!kBR1XSK6L4= -100*0.005807;
 
 select, flag=twiss, clear;
 select, flag=twiss, column=name, s,betx,bety,disp;
