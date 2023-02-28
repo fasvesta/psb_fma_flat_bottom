@@ -33,7 +33,7 @@ ENDMATCH;
 !kBR1XSK6L4= -100*0.005807;
 
 select, flag=twiss, clear;
-select, flag=twiss, column=name, s,betx,bety,disp;
+select, flag=twiss, column=name, s,betx,bety,dx;
 twiss, sequence=psb1, file=twiss_thick;
 
 /******************************************************************************************
@@ -45,6 +45,8 @@ refer=centre;
 endedit;
 use, sequence=psb1;
 
+select, flag = MAKETHIN, clear;
+select, flag=MAKETHIN, SLICE=3, thick=false;
 MAKETHIN, SEQUENCE=psb1, STYLE=SIMPLE;
 
 seqedit, sequence = psb1;
@@ -83,5 +85,5 @@ MATCH, Sequence=psb1;
 ENDMATCH; 
 
 select, flag=twiss, clear;
-select, flag=twiss, column=name, s,betx,bety,dx, dpx, dy, dpy, alfx, alfy;
+select, flag=twiss, column=name, s,betx,bety,dx;
 twiss, sequence=psb1, file=twiss_thin;
