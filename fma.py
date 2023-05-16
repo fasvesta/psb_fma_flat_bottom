@@ -46,7 +46,7 @@ cbar=plt.colorbar()
 cbar.set_label('d',fontsize='18')
 cbar.ax.tick_params(labelsize='18')
 plt.tight_layout()
-plt.savefig('fma_off.png')
+plt.savefig('test_fma.png')
 
 fig2=plt.figure()
 XX,YY = np.meshgrid(np.unique(x[:,0]), np.unique(y[:,0]))
@@ -62,7 +62,7 @@ plt.clim(-20.5,-4.5)
 cbar=plt.colorbar()
 cbar.set_label('d',fontsize='18')
 cbar.ax.tick_params(labelsize='18')
-fig2.savefig('initial_distribution_off.png')
+fig2.savefig('test_initial_distribution.png')
 
 
 plt.show()

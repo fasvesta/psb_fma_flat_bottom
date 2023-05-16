@@ -58,9 +58,12 @@ xf.install_spacecharge_frozen(line=line,
 # Build Tracker #
 #################
 
-tracker = xt.Tracker(_context=context,
-                    line=line)
-tracker_sc_off = tracker.filter_elements(exclude_types_starting_with='SpaceCh')
+line.build_tracker(_context=context)
+line_sc_off = line.filter_elements(exclude_types_starting_with='SpaceCh')
+
+#tracker = xt.Tracker(_context=context,
+#                    line=line)
+#tracker_sc_off = tracker.filter_elements(exclude_types_starting_with='SpaceCh')
 
 ######################
 # Generate particles #
@@ -72,16 +75,16 @@ x_norm, y_norm, _, _ = xp.generate_2D_polar_grid(
     r_range = (0.1, 7),
     nr = 30)
 
-particles = xp.build_particles(tracker=tracker, particle_ref=line.particle_ref,
+particles = xp.build_particles(line=line, particle_ref=line.particle_ref,
                                x_norm=x_norm, y_norm=y_norm, delta=0,
-                               scale_with_transverse_norm_emitt=(nemitt_x, nemitt_y))
+                               nemitt_x=nemitt_x, nemitt_y=nemitt_y)
 
-tracker.track(particles, num_turns=num_turns, turn_by_turn_monitor=True )
+line.track(particles, num_turns=num_turns, turn_by_turn_monitor=True )
 
-np.save('x',tracker.record_last_track.x)
-np.save('px',tracker.record_last_track.px)
-np.save('y',tracker.record_last_track.y)
-np.save('py',tracker.record_last_track.py)
-np.save('z',tracker.record_last_track.zeta)
-np.save('dp',tracker.record_last_track.delta)
+np.save('x',line.record_last_track.x)
+np.save('px',line.record_last_track.px)
+np.save('y',line.record_last_track.y)
+np.save('py',line.record_last_track.py)
+np.save('z',line.record_last_track.zeta)
+np.save('dp',line.record_last_track.delta)
 
