@@ -18,6 +18,7 @@ use, sequence=psb1;
  * Match for desired working point
  ******************************************************************************************/
 
+# to change tunes QH & QV
 
 QH = 4.2;
 QV = 4.4;
@@ -30,6 +31,7 @@ MATCH, Sequence=psb1;
 	JACOBIAN,CALLS=1000,TOLERANCE=1.0E-18,STRATEGY=3;
 ENDMATCH; 
 
+# to include the measured errors as in the control room (note different calibration for different magnets)
 !kBR1XSK6L4= -100*0.005807;
 
 select, flag=twiss, clear;
@@ -48,6 +50,8 @@ use, sequence=psb1;
 select, flag = MAKETHIN, clear;
 select, flag=MAKETHIN, SLICE=3, thick=false;
 MAKETHIN, SEQUENCE=psb1, STYLE=SIMPLE;
+
+# splitting to have 160 markers and respect periodicity
 
 seqedit, sequence = psb1;
 flatten;
