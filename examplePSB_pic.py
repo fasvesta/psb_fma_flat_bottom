@@ -3,7 +3,7 @@ from cpymad.madx import Madx
 import xtrack as xt
 import xpart as xp
 import xobjects as xo
-import xfields as 
+import xfields as xf
 # to make output folder in this script
 import os
 # to use parabolic longitudinal profile
@@ -15,13 +15,13 @@ from statisticalEmittance import *
 # Choose a context #
 ####################
 
-# context = xo.ContextCpu()
-context = xo.ContextCupy()
+context = xo.ContextCpu()
+#context = xo.ContextCupy()
 # context = xo.ContextPyopencl('0.0')
 
 print(context)
 
-os.mkdir('output')
+#os.mkdir('output')
 
 mad = Madx()
 mad.call('psb_flat_bottom.madx')
@@ -36,9 +36,10 @@ bunch_intensity=50e10
 sigma_z=16.9
 
 # from space charge example
-num_turns=1200 
+num_turns=1 
 num_spacecharge_interactions = 160 
 tol_spacecharge_position = 1e-2 
+n_part=int(100e3)
 
 # Available modes: frozen/quasi-frozen/pic
 mode = 'pic'
@@ -103,7 +104,7 @@ particles = parabolic_longitudinal_distribution(_context=context, num_particles=
                             line=line_sc_off)
 
 # to estimate emittance if needed
-r=StatisticalEmittance(context='GPU')
+r=StatisticalEmittance(context='CPU')
 bunch_moments=r.measure_bunch_moments(particles)
 print(bunch_moments['nemitt_x'])
 print(bunch_moments['nemitt_y'])
